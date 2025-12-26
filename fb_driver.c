@@ -46,15 +46,17 @@ static void fb_move_cursor(unsigned short pos) {
 }
 
 /** fb_write_cell:
- *  Writes a character with the given foreground and background to position i
+ *  Writes a character with the given foreground and background to cell i
  *  in the framebuffer.
  *
- *  @param i  The location in the framebuffer
+ *  @param i  The cell index in the framebuffer
  *  @param c  The character
  *  @param fg The foreground color
  *  @param bg The background color
  */
 static void fb_write_cell(unsigned int i, char c, unsigned char fg, unsigned char bg) {
+    /* each cell uses two indices */
+    i = 2 * i;
     fb[i] = c;
     fb[i + 1] = ((fg & 0x0F) << 4) | (bg & 0x0F);
 }
@@ -68,7 +70,7 @@ static void fb_clear(void) {
 int write(char *buf, unsigned int len) {
     static unsigned short cursor = 0;
     for (unsigned int i = 0; i < len; i++) {
-        fb_write_cell(2 * cursor, buf[i], FB_BLACK, FB_LIGHT_GREY);
+        fb_write_cell(cursor, buf[i], FB_BLACK, FB_LIGHT_GREY);
         fb_move_cursor(cursor++);
         if (cursor == FB_ROWS * FB_COLUMNS) {
             cursor = 0;
