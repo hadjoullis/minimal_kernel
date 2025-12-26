@@ -1,3 +1,7 @@
-int sum_of_three(int arg1, int arg2, int arg3) {
-    return arg1 + arg2 + arg3;
+#include "fb_driver.h"
+
+int main(void) {
+    char msg[] = "hello world!";
+    write(msg, sizeof(msg) - 1);
+    return 0;
 }
