@@ -11,6 +11,7 @@
 
 #define FB_ROWS                 25
 #define FB_COLUMNS              80
+#define FB_END (FB_ROWS * FB_COLUMNS)
 
 enum {
     FB_BLACK = 0,
@@ -62,8 +63,8 @@ static void fb_write_cell(unsigned int i, char c, unsigned char fg, unsigned cha
 }
 
 static void fb_clear(void) {
-    for (unsigned int i = 0; i < FB_ROWS * FB_COLUMNS; i++) {
-        fb_write_cell(2 * i, '\0', FB_BLACK, FB_BLACK);
+    for (unsigned int i = 0; i < FB_END; i++) {
+        fb_write_cell(i, '\0', FB_BLACK, FB_BLACK);
     }
 }
 
@@ -72,7 +73,7 @@ int write(char *buf, unsigned int len) {
     for (unsigned int i = 0; i < len; i++) {
         fb_write_cell(cursor, buf[i], FB_BLACK, FB_LIGHT_GREY);
         fb_move_cursor(cursor++);
-        if (cursor == FB_ROWS * FB_COLUMNS) {
+        if (cursor == FB_END) {
             cursor = 0;
             // TODO: implemnt screen scrolling
             fb_clear();
