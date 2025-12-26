@@ -68,9 +68,10 @@ static void fb_clear(void) {
     }
 }
 
-int write(char *buf, unsigned int len) {
+int fb_write(char *buf, unsigned int len) {
     static unsigned short cursor = 0;
     for (unsigned int i = 0; i < len; i++) {
+        // TODO: switch case to handle special chars (e.g. '\n')
         fb_write_cell(cursor, buf[i], FB_BLACK, FB_LIGHT_GREY);
         fb_move_cursor(cursor++);
         if (cursor == FB_END) {
