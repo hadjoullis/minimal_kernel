@@ -13,7 +13,7 @@
 #define FB_COLUMNS              80
 #define FB_END (FB_ROWS * FB_COLUMNS)
 
-enum {
+enum FB_COLOR {
     FB_BLACK = 0,
     FB_BLUE,
     FB_GREEN,
@@ -29,7 +29,7 @@ enum {
     FB_LIGHT_RED,
     FB_LIGHT_BROWN,
     FB_WHITE,
-} FB_COLOR;
+};
 
 /* The starting address of memory-mapped I/O */
 char * const fb = (char *)0x000B8000;
