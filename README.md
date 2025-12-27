@@ -1,5 +1,21 @@
+# minimal kernel
+- writing from scratch a very simple kernel for 32bit x86 architecture
+- following [The little book about OS development](https://littleosbook.github.io/book.pdf)
+
+## BUILDING
+Install dependencies:
+- grub-legacy 0.97
+- bochs 3.0.0
+- cdrtools
+- nasm
+
+Run:
+```
+make && make run
+```
+
 ## notes:
-- build bochs taken from [OSdev wiki](https://wiki.osdev.org/Bochs):
+- configure script for bochs taken from [OSdev wiki](https://wiki.osdev.org/Bochs):
     ./configure --enable-smp \
         --enable-cpu-level=6 \
         --enable-all-optimizations \
