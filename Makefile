@@ -7,7 +7,7 @@ DEPS    = $(SRCS_C:src/%.c=$(BUILD)/%.d)
 CC      = gcc
 CFLAGS  = -m32 -nostdlib -nostdinc -fno-builtin -fno-stack-protector \
           -nostartfiles -nodefaultlibs -Wall -Wextra -Werror -c      \
-          -Iinclude -MMD -MP -O0
+          -Iinclude -MMD -MP -O0 -std=c11
 LDFLAGS = -T src/link.ld -melf_i386
 AS      = nasm
 ASFLAGS = -f elf
