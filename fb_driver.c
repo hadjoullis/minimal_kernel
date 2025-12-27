@@ -72,13 +72,19 @@ int fb_write(char *buf, unsigned int len) {
     static unsigned short cursor = 0;
     for (unsigned int i = 0; i < len; i++) {
         // TODO: switch case to handle special chars (e.g. '\n')
-        fb_write_cell(cursor, buf[i], FB_BLACK, FB_LIGHT_GREY);
-        fb_move_cursor(cursor++);
-        if (cursor == FB_END) {
+        switch (buf[i]) {
+        case '\n': cursor += FB_COLUMNS - (cursor % FB_COLUMNS); break;
+        case '\t': cursor += 4; break;
+        default:
+                fb_write_cell(cursor, buf[i], FB_BLACK, FB_LIGHT_GREY);
+                cursor++;
+        }
+        if (cursor >= FB_END) {
             cursor = 0;
             // TODO: implemnt screen scrolling
             fb_clear();
         }
+        fb_move_cursor(cursor);
     }
     return 0;
 }
