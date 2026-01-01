@@ -2,6 +2,10 @@
 - writing from scratch a very simple kernel for 32bit x86 architecture
 - following [The little book about OS development](https://littleosbook.github.io/book.pdf)
 
+## current features:
+- driver for writing to framebuffer (console)
+- driver for writing to serial port (bochs logging)
+
 ## BUILDING
 Install dependencies:
 - grub-legacy 0.97
